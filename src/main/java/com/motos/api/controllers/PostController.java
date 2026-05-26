@@ -31,6 +31,17 @@ public class PostController {
         postRepository.deleteById(id);
     }
 
+    @PutMapping("/{id}/like")
+    public Post likePost(@PathVariable Long id) {
+
+        Post post = postRepository.findById(id)
+            .orElseThrow();
+
+        post.setLikes(post.getLikes() + 1);
+
+        return postRepository.save(post);
+    }
+
 
 
 }

@@ -14,6 +14,8 @@ public class Post {
 
     private String imageUrl;
 
+    private int likes = 0;
+
     public Post() {
     }
 
@@ -45,4 +47,13 @@ public class Post {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
 }
