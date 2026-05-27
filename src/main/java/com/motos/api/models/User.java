@@ -1,6 +1,7 @@
 package com.motos.api.models;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -12,9 +13,10 @@ public class User {
 
     @Column(unique = true)
     private String username;
-
+    
+    @JsonIgnore
     private String password;
-
+    
     public User() {
     }
 
