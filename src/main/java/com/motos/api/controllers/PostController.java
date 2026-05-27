@@ -4,7 +4,10 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
 import com.motos.api.models.Post;
+import com.motos.api.models.User;
+
 import com.motos.api.repositories.PostRepository;
+import com.motos.api.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,9 @@ public class PostController {
     private PostRepository postRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private Cloudinary cloudinary;
 
     @GetMapping
@@ -34,9 +40,16 @@ public class PostController {
             @RequestParam("text") String text,
 
             @RequestParam("image")
-            MultipartFile image
+            MultipartFile image,
+
+            @RequestParam("username")
+            String username
 
     ) throws Exception {
+
+        User user = userRepository
+                .findByUsername(username)
+                .orElseThrow();
 
         String imageUrl = cloudinary.uploader()
                 .upload(
@@ -50,6 +63,7 @@ public class PostController {
 
         post.setText(text);
         post.setImageUrl(imageUrl);
+        post.setUser(user);
 
         return postRepository.save(post);
     }
