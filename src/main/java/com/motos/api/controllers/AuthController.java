@@ -61,11 +61,13 @@ public class AuthController {
             String token =
                     JwtUtil.generateToken(username);
 
-            return ResponseEntity.ok(
-                    Map.of(
-                            "token", token
-                    )
-            );
+         return ResponseEntity.ok(
+        Map.of(
+                "token", token,
+                "id", user.get().getId(),
+                "username", user.get().getUsername()
+        )
+);
         }
 
         return ResponseEntity
