@@ -39,11 +39,9 @@ public class PostController {
 
             @RequestParam("text") String text,
 
-            @RequestParam("image")
-            MultipartFile image,
+            @RequestParam("image") MultipartFile image,
 
-            @RequestParam("username")
-            String username
+            @RequestParam("username") String username
 
     ) throws Exception {
 
@@ -76,17 +74,58 @@ public class PostController {
         postRepository.deleteById(id);
     }
 
-    @PutMapping("/{id}/like")
-    public Post likePost(
-            @PathVariable Long id
+    @PutMapping("/{id}/react/{type}")
+    public Post reactPost(
+            @PathVariable Long id,
+            @PathVariable String type
     ) {
 
         Post post = postRepository.findById(id)
                 .orElseThrow();
 
-        post.setLikes(
-                post.getLikes() + 1
-        );
+        switch (type.toLowerCase()) {
+
+            case "like":
+                post.setLikes(
+                        post.getLikes() + 1
+                );
+                break;
+
+            case "love":
+                post.setLoves(
+                        post.getLoves() + 1
+                );
+                break;
+
+            case "haha":
+                post.setHahas(
+                        post.getHahas() + 1
+                );
+                break;
+
+            case "wow":
+                post.setWows(
+                        post.getWows() + 1
+                );
+                break;
+
+            case "sad":
+                post.setSads(
+                        post.getSads() + 1
+                );
+                break;
+
+            case "angry":
+                post.setAngrys(
+                        post.getAngrys() + 1
+                );
+                break;
+
+            default:
+                throw new RuntimeException(
+                        "Reacción no válida"
+                );
+        }
 
         return postRepository.save(post);
     }

@@ -16,6 +16,16 @@ public class Post {
 
     private int likes = 0;
 
+    private int loves = 0;
+
+    private int hahas = 0;
+
+    private int wows = 0;
+
+    private int sads = 0;
+
+    private int angrys = 0;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -40,6 +50,34 @@ public class Post {
         return imageUrl;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public int getLoves() {
+        return loves;
+    }
+
+    public int getHahas() {
+        return hahas;
+    }
+
+    public int getWows() {
+        return wows;
+    }
+
+    public int getSads() {
+        return sads;
+    }
+
+    public int getAngrys() {
+        return angrys;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,20 +90,31 @@ public class Post {
         this.imageUrl = imageUrl;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
     public void setLikes(int likes) {
         this.likes = likes;
     }
 
-    public User getUser() {
-        return user;
+    public void setLoves(int loves) {
+        this.loves = loves;
+    }
+
+    public void setHahas(int hahas) {
+        this.hahas = hahas;
+    }
+
+    public void setWows(int wows) {
+        this.wows = wows;
+    }
+
+    public void setSads(int sads) {
+        this.sads = sads;
+    }
+
+    public void setAngrys(int angrys) {
+        this.angrys = angrys;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
-
 }
